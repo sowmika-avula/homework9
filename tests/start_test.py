@@ -1,6 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
+from app.config import settings
 
 @pytest.fixture
 def client():
@@ -9,8 +10,8 @@ def client():
 @pytest.fixture
 def access_token(client):
     form_data = {
-        "username": "admin",
-        "password": "admin123",
+        "username": settings.ADMIN_USER,
+        "password": settings.ADMIN_PASSWORD,
     }
     response = client.post("/token", data=form_data)
     return response.json()["access_token"]
@@ -23,8 +24,8 @@ def test_root(client):
 
 def test_login_for_access_token(client):
     form_data = {
-        "username": "admin",
-        "password": "admin123",
+        "username": settings.ADMIN_USER,
+        "password": settings.ADMIN_PASSWORD,
     }
     response = client.post("/token", data=form_data)
     assert response.status_code == 200
