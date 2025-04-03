@@ -3,7 +3,7 @@ annotated-types==0.6.0
 anyio==4.3.0
 bcrypt==4.1.2
 certifi==2024.2.2
-cffi>=1.17.0
+cffi
 click==8.1.7
 cryptography==42.0.5
 ecdsa==0.18.0
