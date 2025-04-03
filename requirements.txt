@@ -3,7 +3,7 @@ annotated-types==0.6.0
 anyio==4.3.0
 bcrypt==4.1.2
 certifi==2024.2.2
-cffi==1.16.0
+cffi>=1.17.0
 click==8.1.7
 cryptography==42.0.5
 ecdsa==0.18.0
@@ -24,7 +24,7 @@ pydantic>=2.6.1
 pydantic-core==2.16.3
 pydantic-settings>=2.1.0
 pypng==0.20220715.0
-pytest 
+pytest
 pytest-asyncio>=0.23.5
 pytest-mock==3.14.0
 python-dotenv>=1.0.0
