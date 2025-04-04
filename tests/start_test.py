@@ -5,7 +5,9 @@ from app.config import settings
 
 @pytest.fixture
 def client():
-    return TestClient(app)
+    # Updated initialization for newer FastAPI/Starlette versions
+    client = TestClient(app)
+    return client
 
 @pytest.fixture
 def access_token(client):
@@ -14,8 +16,12 @@ def access_token(client):
         "password": settings.ADMIN_PASSWORD,
     }
     response = client.post("/token", data=form_data)
+    # Add error handling
+    if response.status_code != 200:
+        pytest.fail(f"Failed to get token: {response.status_code} - {response.text}")
     return response.json()["access_token"]
 
+# Rest of your tests remain unchanged
 def test_root(client):
     response = client.get("/")
     assert response.status_code == 200
@@ -97,3 +103,4 @@ def test_invalid_qr_code_request(client, access_token):
     }
     response = client.post("/qr-codes/", json=qr_request, headers=headers)
     assert response.status_code == 422  # Validation error
+    
